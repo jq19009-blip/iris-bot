@@ -1,0 +1,14 @@
+# Secretos: nunca se suben al repositorio
+.env
+
+# Base de datos con conversaciones de personas reales
+*.db
+
+# Entorno virtual y archivos generados por Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editor
+.vscode/
