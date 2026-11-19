@@ -181,16 +181,34 @@ def describir_error(error: Exception) -> str:
 # --------------------------------------------------------------------------
 
 
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Responde al comando /start."""
-    nombre = update.effective_user.first_name or "estudiante"
-    logger.info("Nuevo /start de %s (id %s)", nombre, update.effective_user.id)
-    await update.message.reply_text(
-        f"¡Hola, {nombre}! Soy Iris, tu asistente académica. 🎓\n\n"
-        "Contame qué necesitás saber: fechas de entrega, exámenes, "
-        "calendario académico o trámites de la facultad.\n\n"
-        "Escribí /help para ver lo que sé hacer."
-    )
+
+    try:
+        # Consultamos los datos del estudiante en la API de Java.
+        datos = await ejecutar_funcion("obtener_datos_estudiante", {})
+
+        # Obtenemos el nombre desde la base de datos académica.
+        nombre = datos.get("nombre", "estudiante")
+
+        logger.info("Nuevo /start de %s (Telegram ID: %s)", nombre, update.effective_user.id)
+
+        await update.message.reply_text(
+            f"¡Hola, {nombre}! Soy Iris, tu asistente académica. 🎓\n\n"
+            "Contame qué necesitás saber: fechas de entrega, exámenes, "
+            "calendario académico o trámites de la facultad.\n\n"
+            "Escribí /help para ver lo que sé hacer."
+        )
+
+    except Exception as error:
+        logger.exception("Error al obtener los datos del estudiante")
+
+        await update.message.reply_text(
+            "¡Hola! Soy Iris, tu asistente académica. 🎓\n\n"
+            "Contame qué necesitás saber."
+        )
+
 
 
 async def ayuda(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

@@ -173,6 +173,10 @@ async def obtener_historial_academico() -> list:
     """Devuelve el historial académico completo del estudiante."""
     return await _consultar_api_academica("historial")
 
+async def obtener_examenes() -> list:
+    """Devuelve todos los exámenes, ordenados por fecha y horario."""
+    return await _consultar_api_academica("examenes")
+
 
 # ---------------------------------------------------------------------------
 # Declaraciones de herramientas para Gemini
@@ -308,6 +312,19 @@ DECLARACIONES = [
             "properties": {},
         },
     },
+    {
+    "type": "function",
+    "name": "obtener_examenes",
+    "description": (
+        "Obtiene los exámenes del estudiante ordenados por fecha y horario. "
+        "Cada examen incluye materia, fecha, horario, tipo, estado y nota. "
+        "Los exámenes pendientes no tienen nota."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {},
+    },
+},
 ]
 
 
@@ -325,6 +342,7 @@ FUNCIONES = {
     "obtener_materias_pendientes": obtener_materias_pendientes,
     "obtener_notas_academicas": obtener_notas_academicas,
     "obtener_historial_academico": obtener_historial_academico,
+    "obtener_examenes": obtener_examenes,
 }
 
 
