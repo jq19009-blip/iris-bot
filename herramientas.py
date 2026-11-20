@@ -1,4 +1,4 @@
-"""
+﻿"""
 Herramientas de Iris: funciones que Gemini puede pedir que se ejecuten.
 
 Incluye:

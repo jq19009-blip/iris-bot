@@ -1,4 +1,4 @@
-"""
+﻿"""
 Memoria y persistencia de Iris en SQLite:
 - Historial de conversación (`mensajes`).
 - Consultas académicas analizadas con salida estructurada (`consultas_estructuradas`).

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Iris v6 - Asistente académica en Telegram (Hito 4).
 
 - Responde con Gemini (Interactions API sin estado) y el prompt de prompts.py.
